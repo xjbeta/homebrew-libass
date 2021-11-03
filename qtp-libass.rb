@@ -1,5 +1,5 @@
 
-class Libass < Formula
+class QtpLibass < Formula
   desc "Subtitle renderer for the ASS/SSA subtitle format"
   homepage "https://github.com/libass/libass"
   url "https://github.com/libass/libass/releases/download/0.15.2/libass-0.15.2.tar.xz"
