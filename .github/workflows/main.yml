@@ -19,8 +19,12 @@ jobs:
         run: |
           brew tap xjbeta/homebrew-libass
           brew developer off
-          for dependency in $(brew deps -n qtp-libass); do sed -i '' 's/def install/def install\\n\\tENV["CFLAGS"] = "-mmacosx-version-min=10.12"\\n\\tENV["LDFLAGS"] = "-mmacosx-version-min=10.12"/' $(brew edit --print-path $dependency); done
+          for dependency in $(brew deps -n qtp-libass); do sed -i '' 's/def install/def install\n\tENV["CFLAGS"] = "-mmacosx-version-min=10.12"\n\tENV["LDFLAGS"] = "-mmacosx-version-min=10.12"/' $(brew edit --print-path $dependency); done
+          sed -i '' 's/def install/def install\n\tENV["CFLAGS"] = "-mmacosx-version-min=10.12"\n\tENV["LDFLAGS"] = "-mmacosx-version-min=10.12"/' $(brew edit --print-path qtp-libass)
+          
           for dependency in $(brew deps -n qtp-libass); do brew reinstall --build-from-source $dependency; done
+          brew reinstall --build-from-source qtp-libass
+          
 
       - name: Run change_lib_dependencies.rb
         run: |
