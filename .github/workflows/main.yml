@@ -28,13 +28,7 @@ jobs:
           mkdir deps
           other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix qtp-libass)/lib/libass.dylib"
 
-      - name: dylibs LC_BUILD_VERSION LC_VERSION_MIN_MACOSX
-        shell: zsh {0}
-        run: |
-          for lib in deps/lib/*; do (echo $lib; otool -l $lib | grep -i LC_BUILD_VERSION -A 4); done
-          for lib in deps/lib/*; do (echo $lib; otool -l $lib | grep -A 3 LC_VERSION_MIN_MACOSX); done
-        
-        
+
 
       - name: Archive libs
         uses: actions/upload-artifact@v2
