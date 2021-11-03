@@ -11,7 +11,7 @@ on:
 
 jobs:
   release-osx:
-    runs-on: macos-10.15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Prepare install qtp-libass
@@ -19,8 +19,8 @@ jobs:
         run: |
           brew tap xjbeta/homebrew-libass
           brew developer on
-          for dependency in $(brew deps -n qtp-libass); do sed -i '' 's/def install/def install\\n\\tENV["CFLAGS"] = "-mmacosx-version-min=10.12"\\n\\tENV["LDFLAGS"] = "-mmacosx-version-min=10.12"/' $(brew edit --print-path $dependency); done
-          sed -i '' 's/def install/def install\\n\\tENV["CFLAGS"] = "-mmacosx-version-min=10.12"\\n\\tENV["LDFLAGS"] = "-mmacosx-version-min=10.12"/' $(brew edit --print-path qtp-libass)
+          for dependency in $(brew deps -n qtp-libass); do sed -i '' 's/def install/def install\n\tENV["CFLAGS"] = "-mmacosx-version-min=10.12"\n\tENV["LDFLAGS"] = "-mmacosx-version-min=10.12"/' $(brew edit --print-path $dependency); done
+          sed -i '' 's/def install/def install\n\tENV["CFLAGS"] = "-mmacosx-version-min=10.12"\n\tENV["LDFLAGS"] = "-mmacosx-version-min=10.12"/' $(brew edit --print-path qtp-libass)
           
       - name: Install qtp-libass
         shell: zsh {0}
