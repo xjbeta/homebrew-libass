@@ -22,7 +22,7 @@ jobs:
         shell: zsh {0}
         run: |
           brew tap xjbeta/homebrew-libass
-          for dependency in $(brew deps --include-build -n qtp-libass); do brew install --build-from-source $dependency; done
+          for dependency in $(brew deps -n qtp-libass); do brew reinstall --build-from-source $dependency; done
 
       - name: Run change_lib_dependencies.rb
         run: |
